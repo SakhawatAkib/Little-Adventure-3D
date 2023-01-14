@@ -8,7 +8,7 @@ public class PlayerVFXManager : MonoBehaviour
 {
     public VisualEffect footSteep;
 
-    public void Update_FootSteep(bool state)
+    public void Update_FootStep(bool state)
     {
         if(state)
             footSteep.Play();
