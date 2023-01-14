@@ -55,7 +55,7 @@ Material:
     - Voronoi_02: 15
     - Voronoi_03: 10
     - _Float: 5
-    - _QueueControl: -1
+    - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
     - Vector2: {r: 0.5, g: 2, b: 0, a: 0}
