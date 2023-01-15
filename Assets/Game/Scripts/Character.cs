@@ -20,6 +20,12 @@ public class Character : MonoBehaviour
     private UnityEngine.AI.NavMeshAgent _navMeshAgent;
     private Transform TargetPlayer;
 
+    //State Machine
+    public enum CharacterState
+    {
+        Normal, Attacking
+    }
+    public CharacterState CurrentState;
     private void Awake()
     {
         _cc = GetComponent<CharacterController>();
@@ -39,6 +45,11 @@ public class Character : MonoBehaviour
 
     private void CalculatePlayerMovement()
     {
+        if (_playerInput.MouseButtonDown && _cc.isGrounded)
+        {
+            SwitchStateTo(CharacterState.Attacking);
+            return;
+        }
         _movementVelocity.Set(_playerInput.HorizontalInput, 0f, _playerInput.VerticalInput);
         _movementVelocity.Normalize();
         _movementVelocity = Quaternion.Euler(0, -45f, 0) * _movementVelocity;
@@ -68,10 +79,18 @@ public class Character : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(IsPlayer)
-            CalculatePlayerMovement();
-        else
-            CalculateEnemyMovement();
+        switch (CurrentState)
+        {
+            case CharacterState.Normal:
+                if(IsPlayer)
+                    CalculatePlayerMovement();
+                else
+                    CalculateEnemyMovement();
+                break;
+            case CharacterState.Attacking:
+                break;
+        }
+        
         if (IsPlayer)
         {
             if (_cc.isGrounded == false)
@@ -83,4 +102,32 @@ public class Character : MonoBehaviour
             _cc.Move(_movementVelocity);
         }
     }
+
+    private void SwitchStateTo(CharacterState newState)
+    {
+        //Clear Cache
+        _playerInput.MouseButtonDown = false;
+        
+        //Exiting state
+        switch (CurrentState)
+        {
+            case CharacterState.Normal:
+                break;
+            case CharacterState.Attacking:
+                break;
+        }
+        
+        //Entering state
+        switch (newState)
+        {
+            case CharacterState.Normal:
+                break;
+            case CharacterState.Attacking:
+                break;
+        }
+
+        CurrentState = newState;
+        Debug.Log("Switches to" + CurrentState);
+    }
+    
 }
