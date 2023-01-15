@@ -275,6 +275,8 @@ MonoBehaviour:
   MoveSpeed: 2
   Gravity: -9.8
   IsPlayer: 0
+  AttackSlideDuration: 0.4
+  AttackSlideSpeed: 0.06
   CurrentState: 0
 --- !u!195 &228000921
 NavMeshAgent:
@@ -329,6 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FootSteep: {fileID: 1566308524}
+  AttackVFX: {fileID: 469096078}
 --- !u!114 &254317069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -533,6 +536,83 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
+--- !u!1001 &469096076
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 902661720}
+    m_Modifications:
+    - target: {fileID: 3744957851513120298, guid: 5032253f50fbf924285917747193c530, type: 3}
+      propertyPath: m_InitialEventName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3744957851513120298, guid: 5032253f50fbf924285917747193c530, type: 3}
+      propertyPath: m_InitialEventNameOverriden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3744957851513120300, guid: 5032253f50fbf924285917747193c530, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3744957851513120300, guid: 5032253f50fbf924285917747193c530, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3744957851513120300, guid: 5032253f50fbf924285917747193c530, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3744957851513120300, guid: 5032253f50fbf924285917747193c530, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3744957851513120300, guid: 5032253f50fbf924285917747193c530, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3744957851513120300, guid: 5032253f50fbf924285917747193c530, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3744957851513120300, guid: 5032253f50fbf924285917747193c530, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3744957851513120300, guid: 5032253f50fbf924285917747193c530, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3744957851513120300, guid: 5032253f50fbf924285917747193c530, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3744957851513120300, guid: 5032253f50fbf924285917747193c530, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3744957851513120300, guid: 5032253f50fbf924285917747193c530, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3744957851513120303, guid: 5032253f50fbf924285917747193c530, type: 3}
+      propertyPath: m_Name
+      value: VFX Smash
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5032253f50fbf924285917747193c530, type: 3}
+--- !u!4 &469096077 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3744957851513120300, guid: 5032253f50fbf924285917747193c530, type: 3}
+  m_PrefabInstance: {fileID: 469096076}
+  m_PrefabAsset: {fileID: 0}
+--- !u!2083052967 &469096078 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 3744957851513120298, guid: 5032253f50fbf924285917747193c530, type: 3}
+  m_PrefabInstance: {fileID: 469096076}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &502589807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -991,6 +1071,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1566308523}
+  - {fileID: 469096077}
   m_Father: {fileID: 332119179}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2553,6 +2634,8 @@ MonoBehaviour:
   MoveSpeed: 5
   Gravity: -20
   IsPlayer: 1
+  AttackSlideDuration: 0.4
+  AttackSlideSpeed: 0.06
   CurrentState: 0
 --- !u!114 &2064130692
 MonoBehaviour:
