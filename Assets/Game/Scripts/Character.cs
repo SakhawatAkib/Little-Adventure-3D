@@ -34,7 +34,7 @@ public class Character : MonoBehaviour
     //State Machine
     public enum CharacterState
     {
-        Normal, Attacking
+        Normal, Attacking, Dead, BeingHit
     }
     public CharacterState CurrentState;
     private void Awake()
@@ -144,6 +144,13 @@ public class Character : MonoBehaviour
             case CharacterState.Normal:
                 break;
             case CharacterState.Attacking:
+
+                if (_damageCaster != null)
+                    DisableDamageCaster();
+                break;
+            case CharacterState.Dead:
+                return;
+            case CharacterState.BeingHit:
                 break;
         }
         
@@ -182,6 +189,11 @@ public class Character : MonoBehaviour
         if (_health != null)
         {
             _health.ApplyDamage(damage);
+        }
+
+        if (!IsPlayer)
+        {
+            GetComponent<EnemyVFXManager>().PlayBeingHitVFX(attackerPos);
         }
     }
 
