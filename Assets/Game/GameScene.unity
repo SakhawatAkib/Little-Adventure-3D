@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1802847, g: 0.22571465, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028502, g: 0.22571486, b: 0.30692336, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -333,6 +333,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FootSteep: {fileID: 1566308524}
   AttackVFX: {fileID: 469096078}
+  BeingHitVFX: {fileID: 1588263174}
+  BeingHitSplashVFX: {fileID: 5091917010390914819, guid: d1fe802ee7b6fc24497016910b9375d6, type: 3}
 --- !u!114 &228000924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2434,6 +2436,11 @@ PrefabInstance:
 --- !u!4 &1588263173 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5680359259124363205, guid: 0570e3315dd21b34094ca0475d3310a7, type: 3}
+  m_PrefabInstance: {fileID: 1588263172}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1588263174 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1675108850642248862, guid: 0570e3315dd21b34094ca0475d3310a7, type: 3}
   m_PrefabInstance: {fileID: 1588263172}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1592230829
