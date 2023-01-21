@@ -32,6 +32,8 @@ public class Character : MonoBehaviour
     public float AttackSlideDuration = 0.4f;
     public float AttackSlideSpeed = 0.06f;
 
+    private Vector3 impactOnCharacter;
+
     //State Machine
     public enum CharacterState
     {
@@ -118,8 +120,6 @@ public class Character : MonoBehaviour
 
                 if (IsPlayer)
                 {
-                    _movementVelocity = Vector3.zero;
-
                     if (Time.time < attackStartTime + AttackSlideDuration)
                     {
                         float timePassed = Time.time - attackStartTime;
@@ -131,6 +131,13 @@ public class Character : MonoBehaviour
             
             case CharacterState.Dead:
                 return;
+            case CharacterState.BeingHit:
+                if (impactOnCharacter.magnitude > 0.2f)
+                {
+                    _movementVelocity = impactOnCharacter * Time.deltaTime;
+                }
+                impactOnCharacter = Vector3.Lerp(impactOnCharacter, Vector3.zero, Time.deltaTime * 5);
+                break;
         }
         
         if (IsPlayer)
@@ -142,6 +149,7 @@ public class Character : MonoBehaviour
         
             _movementVelocity += _verticalVelocity * Vector3.up * Time.deltaTime;
             _cc.Move(_movementVelocity);
+            _movementVelocity = Vector3.zero;
         } 
     }
 
@@ -193,6 +201,9 @@ public class Character : MonoBehaviour
                 _animator.SetTrigger("Dead");
                 StartCoroutine(MaterialDissolve());
                 break;
+            case CharacterState.BeingHit:
+                _animator.SetTrigger("BeingHit");
+                break;
         }
 
         CurrentState = newState;
@@ -200,6 +211,11 @@ public class Character : MonoBehaviour
     }
 
     public void AttackAnimationEnds()
+    {
+        SwitchStateTo(CharacterState.Normal);
+    }
+
+    public void BeingHitAnimationEnds()
     {
         SwitchStateTo(CharacterState.Normal);
     }
@@ -217,6 +233,20 @@ public class Character : MonoBehaviour
         }
 
         StartCoroutine(MaterialBlink());
+
+        if (IsPlayer)
+        {
+            SwitchStateTo(CharacterState.BeingHit);
+            AddImpact(attackerPos, 10f);
+        }
+    }
+
+    private void AddImpact(Vector3 attackerPos, float force)
+    {
+        Vector3 impactDir = transform.position - attackerPos;
+        impactDir.Normalize();
+        impactDir.y = 0;
+        impactOnCharacter = impactDir * force;
     }
 
     public void EnableDamageCaster()
