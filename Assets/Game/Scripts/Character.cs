@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -41,6 +42,8 @@ public class Character : MonoBehaviour
     //Material animation
     private MaterialPropertyBlock _materialPropertyBlock;
     private SkinnedMeshRenderer _skinnedMeshRenderer;
+
+    public GameObject ItemToDrop;
     
     private void Awake()
     {
@@ -125,6 +128,9 @@ public class Character : MonoBehaviour
                     }
                 }
                 break;
+            
+            case CharacterState.Dead:
+                return;
         }
         
         if (IsPlayer)
@@ -139,7 +145,7 @@ public class Character : MonoBehaviour
         } 
     }
 
-    private void SwitchStateTo(CharacterState newState)
+    public void SwitchStateTo(CharacterState newState)
     {
         if (IsPlayer)
         {
@@ -181,6 +187,11 @@ public class Character : MonoBehaviour
                 if (IsPlayer)
                     attackStartTime = Time.time;
                 
+                break;
+            case CharacterState.Dead:
+                _cc.enabled = false;
+                _animator.SetTrigger("Dead");
+                StartCoroutine(MaterialDissolve());
                 break;
         }
 
@@ -226,5 +237,37 @@ public class Character : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         _materialPropertyBlock.SetFloat("_blink", 0f);
         _skinnedMeshRenderer.SetPropertyBlock(_materialPropertyBlock);
+    }
+
+    IEnumerator MaterialDissolve()
+    {
+        yield return new WaitForSeconds(2);
+
+        float dissolveTimeDuration = 2f;
+        float currrentDissolveTime = 0;
+        float dissolveHight_start = 20f;
+        float dissolveHight_target = -10f;
+        float dissolveHight;
+        
+        _materialPropertyBlock.SetFloat("_enableDissolve", 1f);
+        _skinnedMeshRenderer.SetPropertyBlock(_materialPropertyBlock);
+
+        while (currrentDissolveTime < dissolveTimeDuration)
+        {
+            currrentDissolveTime += Time.deltaTime;
+            dissolveHight = Mathf.Lerp(dissolveHight_start, dissolveHight_target, currrentDissolveTime / dissolveTimeDuration);
+            _materialPropertyBlock.SetFloat("_dissolve_height", dissolveHight);
+            _skinnedMeshRenderer.SetPropertyBlock(_materialPropertyBlock);
+            yield return null;
+        }
+        DropItem();
+    }
+
+    public void DropItem()
+    {
+        if (ItemToDrop != null)
+        {
+            Instantiate(ItemToDrop, transform.position, Quaternion.identity);
+        }
     }
 }
