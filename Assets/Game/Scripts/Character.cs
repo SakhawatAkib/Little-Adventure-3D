@@ -15,6 +15,8 @@ public class Character : MonoBehaviour
     public float Gravity = -9.8f;
     private Animator _animator;
 
+    public int Coin;
+    
     [Header("Enemy")] 
     public bool IsPlayer = true;
 
@@ -318,5 +320,28 @@ public class Character : MonoBehaviour
         {
             Instantiate(ItemToDrop, transform.position, Quaternion.identity);
         }
+    }
+
+    public void PickupItem(PickUp item)
+    {
+        switch (item.Type)
+        {
+            case PickUp.PickUpType.Heal:
+                AddHealth(item.Value);
+                break;
+            case PickUp.PickUpType.Coin:
+                AddCoin(item.Value);
+                break;
+        }
+    }
+    private void AddHealth(int health)
+    {
+        _health.AddHealth(health);
+        GetComponent<PlayerVFXManager>().PlayHealVFX();
+    }
+    
+    private void AddCoin(int coin)
+    {
+        Coin += coin;
     }
 }

@@ -9,10 +9,11 @@ public class PlayerVFXManager : MonoBehaviour
     public VisualEffect footSteep;
     public ParticleSystem Blade01;
     public VisualEffect Slash;
+    public VisualEffect Heal;
 
     public void Update_FootStep(bool state)
     {
-        if(state)
+        if (state)
             footSteep.Play();
         else
             footSteep.Stop();
@@ -28,4 +29,10 @@ public class PlayerVFXManager : MonoBehaviour
         Slash.transform.position = pos;
         Slash.Play();
     }
+
+    public void PlayHealVFX()
+    {
+        Heal.Play();
+    }
+
 }

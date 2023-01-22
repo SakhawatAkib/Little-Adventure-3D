@@ -276,9 +276,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 2
   Gravity: -9.8
+  Coin: 0
   IsPlayer: 0
   AttackSlideDuration: 0.4
   AttackSlideSpeed: 0.06
+  IsInvincible: 0
+  invincibleDuration: 2
   CurrentState: 0
   ItemToDrop: {fileID: 1506232422113083869, guid: 3d0a568eb789b2d47818776cabc7b4a9, type: 3}
 --- !u!195 &228000921
@@ -611,7 +614,7 @@ BoxCollider:
   m_GameObject: {fileID: 449997393}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.8, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1135,6 +1138,78 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 36d5e239ddf1c5843979b26c82f9ad52, type: 3}
+--- !u!1001 &802973880
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 1289591580}
+    m_Modifications:
+    - target: {fileID: 6050473045160503341, guid: 59e037f841b401b41beacdaa9802504d, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050473045160503341, guid: 59e037f841b401b41beacdaa9802504d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050473045160503341, guid: 59e037f841b401b41beacdaa9802504d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050473045160503341, guid: 59e037f841b401b41beacdaa9802504d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050473045160503341, guid: 59e037f841b401b41beacdaa9802504d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050473045160503341, guid: 59e037f841b401b41beacdaa9802504d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050473045160503341, guid: 59e037f841b401b41beacdaa9802504d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050473045160503341, guid: 59e037f841b401b41beacdaa9802504d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050473045160503341, guid: 59e037f841b401b41beacdaa9802504d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050473045160503341, guid: 59e037f841b401b41beacdaa9802504d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050473045160503341, guid: 59e037f841b401b41beacdaa9802504d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050473045160503342, guid: 59e037f841b401b41beacdaa9802504d, type: 3}
+      propertyPath: m_Name
+      value: VFX Heal
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050473045160503347, guid: 59e037f841b401b41beacdaa9802504d, type: 3}
+      propertyPath: m_InitialEventName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050473045160503347, guid: 59e037f841b401b41beacdaa9802504d, type: 3}
+      propertyPath: m_InitialEventNameOverriden
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: 59e037f841b401b41beacdaa9802504d, type: 3}
+--- !u!4 &802973881 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6050473045160503341, guid: 59e037f841b401b41beacdaa9802504d, type: 3}
+  m_PrefabInstance: {fileID: 802973880}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &832561507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2161,6 +2236,7 @@ Transform:
   - {fileID: 659307339}
   - {fileID: 1095892675}
   - {fileID: 737850153}
+  - {fileID: 802973881}
   m_Father: {fileID: 1284242381}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2539,6 +2615,11 @@ MonoBehaviour:
 Transform:
   m_CorrespondingSourceObject: {fileID: -6646914059289834340, guid: c8896d83481fca741b2a75c5b0715041, type: 3}
   m_PrefabInstance: {fileID: 1284242380}
+  m_PrefabAsset: {fileID: 0}
+--- !u!2083052967 &1603498465 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 6050473045160503347, guid: 59e037f841b401b41beacdaa9802504d, type: 3}
+  m_PrefabInstance: {fileID: 802973880}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1606112042
 PrefabInstance:
@@ -2925,9 +3006,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 5
   Gravity: -20
+  Coin: 0
   IsPlayer: 1
   AttackSlideDuration: 0.4
   AttackSlideSpeed: 0.06
+  IsInvincible: 0
+  invincibleDuration: 2
   CurrentState: 0
   ItemToDrop: {fileID: 0}
 --- !u!114 &2064130692
@@ -2980,6 +3064,7 @@ MonoBehaviour:
   footSteep: {fileID: 659307340}
   Blade01: {fileID: 1095892676}
   Slash: {fileID: 737850154}
+  Heal: {fileID: 1603498465}
 --- !u!114 &2064130695
 MonoBehaviour:
   m_ObjectHideFlags: 0
