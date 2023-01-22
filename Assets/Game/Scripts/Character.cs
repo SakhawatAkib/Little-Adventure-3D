@@ -34,6 +34,9 @@ public class Character : MonoBehaviour
 
     private Vector3 impactOnCharacter;
 
+    public bool IsInvincible;
+    public float invincibleDuration = 2f;
+
     //State Machine
     public enum CharacterState
     {
@@ -203,6 +206,12 @@ public class Character : MonoBehaviour
                 break;
             case CharacterState.BeingHit:
                 _animator.SetTrigger("BeingHit");
+
+                if (IsPlayer)
+                {
+                    IsInvincible = true;
+                    StartCoroutine(DelayCancelInvincible());
+                }
                 break;
         }
 
@@ -222,6 +231,10 @@ public class Character : MonoBehaviour
 
     public void ApplyDamage(int damage, Vector3 attackerPos = new Vector3())
     {
+        if (IsInvincible)
+        {
+            return;
+        }
         if (_health != null)
         {
             _health.ApplyDamage(damage);
@@ -239,6 +252,12 @@ public class Character : MonoBehaviour
             SwitchStateTo(CharacterState.BeingHit);
             AddImpact(attackerPos, 10f);
         }
+    }
+
+    IEnumerator DelayCancelInvincible()
+    {
+        yield return new WaitForSeconds(invincibleDuration);
+        IsInvincible = false;
     }
 
     private void AddImpact(Vector3 attackerPos, float force)
