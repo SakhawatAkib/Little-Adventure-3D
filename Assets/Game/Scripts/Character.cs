@@ -41,10 +41,12 @@ public class Character : MonoBehaviour
 
     private float attackAnimationDuration;
 
+    public float SlideSpeed = 9f;
+
     //State Machine
     public enum CharacterState
     {
-        Normal, Attacking, Dead, BeingHit
+        Normal, Attacking, Dead, BeingHit, Slide
     }
     public CharacterState CurrentState;
     
@@ -82,6 +84,11 @@ public class Character : MonoBehaviour
         if (_playerInput.MouseButtonDown && _cc.isGrounded)
         {
             SwitchStateTo(CharacterState.Attacking);
+            return;
+        }
+        else if (_playerInput.SpaceKeyDown && _cc.isGrounded) 
+        {
+            SwitchStateTo(CharacterState.Slide);
             return;
         }
         _movementVelocity.Set(_playerInput.HorizontalInput, 0f, _playerInput.VerticalInput);
@@ -160,6 +167,9 @@ public class Character : MonoBehaviour
                 }
                 impactOnCharacter = Vector3.Lerp(impactOnCharacter, Vector3.zero, Time.deltaTime * 5);
                 break;
+            case CharacterState.Slide:
+                _movementVelocity = transform.forward * SlideSpeed * Time.deltaTime;
+                break;
         }
         
         if (IsPlayer)
@@ -180,7 +190,7 @@ public class Character : MonoBehaviour
         if (IsPlayer)
         {
             //Clear Cache
-            _playerInput.MouseButtonDown = false;
+            _playerInput.ClearCache();
         }
         
         //Exiting state
@@ -200,6 +210,8 @@ public class Character : MonoBehaviour
             case CharacterState.Dead:
                 return;
             case CharacterState.BeingHit:
+                break;
+            case CharacterState.Slide:
                 break;
         }
         
@@ -236,10 +248,18 @@ public class Character : MonoBehaviour
                     StartCoroutine(DelayCancelInvincible());
                 }
                 break;
+            case CharacterState.Slide:
+                _animator.SetTrigger("Slide");
+                break;
         }
 
         CurrentState = newState;
         Debug.Log("Switches to" + CurrentState);
+    }
+
+    public void SlideAnimationEnds()
+    {
+        SwitchStateTo(CharacterState.Normal);
     }
 
     public void AttackAnimationEnds()
