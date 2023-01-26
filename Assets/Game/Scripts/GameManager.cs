@@ -1,8 +1,10 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public GameUI_Manager gameUI_Manager;
     public Character PlayerCharacter;
     private bool gameIsOver;
 
@@ -13,24 +15,38 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
-        Debug.Log("GAME OVER");
+        gameUI_Manager.ShowGameOverUI();
     }
 
     public void GameIsFinished()
     {
-        Debug.Log("GAME IS FINISHED");
+        gameUI_Manager.ShowGameIsFinishedUI();
     }
 
     private void Update()
     {
         if (gameIsOver)
             return;
+        
+        if(Input.GetKeyDown(KeyCode.Escape))
+            gameUI_Manager.TogglePauseUI();
 
         if (PlayerCharacter.CurrentState == Character.CharacterState.Dead)
         {
             gameIsOver = true;
             GameOver();
         }
+    }
+
+    public void ReturnToTheMainMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
 
