@@ -11,6 +11,7 @@ public class GameUI_Manager : MonoBehaviour
     public GameObject UI_Pause;
     public GameObject UI_GameOver;
     public GameObject UI_GameIsFinished;
+    public AudioSource bgAudioSource;
 
     private enum GameUI_State
     {
@@ -41,15 +42,19 @@ public class GameUI_Manager : MonoBehaviour
         switch (state)
         {
             case GameUI_State.GamePlay:
+                bgAudioSource.Play();
                 break;
             case GameUI_State.Pause:
                 Time.timeScale = 0;
                 UI_Pause.SetActive(true);
+                bgAudioSource.Stop();
                 break;
             case GameUI_State.GameOver:
+                bgAudioSource.Stop();
                 UI_GameOver.SetActive(true);
                 break;
             case GameUI_State.GameIsFinished:
+                bgAudioSource.Stop();
                 UI_GameIsFinished.SetActive(true);
                 break;
         }

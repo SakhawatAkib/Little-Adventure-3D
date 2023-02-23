@@ -42,6 +42,7 @@ namespace Michsky.UI.Shift
 
         // [Header("SOUNDS")]
         public AudioClip backgroundMusic;
+        public AudioClip playMusic;
         public AudioClip hoverSound;
         public AudioClip clickSound;
 

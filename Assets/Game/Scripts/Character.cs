@@ -60,6 +60,12 @@ public class Character : MonoBehaviour
 
     public GameObject ItemToDrop;
     
+    //Sounds
+    public AudioSource audioSource;
+    public AudioClip coinSound;
+    public AudioClip orbSound;
+    public AudioClip getHurtSound;
+
     private void Awake()
     {
         _cc = GetComponent<CharacterController>();
@@ -330,6 +336,8 @@ public class Character : MonoBehaviour
 
         if (IsPlayer)
         {
+            audioSource.clip = getHurtSound;
+            audioSource.Play();
             SwitchStateTo(CharacterState.BeingHit);
             AddImpact(attackerPos, 10f);
         }
@@ -410,9 +418,13 @@ public class Character : MonoBehaviour
         switch (item.Type)
         {
             case PickUp.PickUpType.Heal:
+                audioSource.clip = orbSound;
+                audioSource.Play();
                 AddHealth(item.Value);
                 break;
             case PickUp.PickUpType.Coin:
+                audioSource.clip = coinSound;
+                audioSource.Play();
                 AddCoin(item.Value);
                 break;
         }

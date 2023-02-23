@@ -179,6 +179,7 @@ namespace Michsky.UI.Shift
 
             // Sounds
             var backgroundMusic = serializedObject.FindProperty("backgroundMusic");
+            var playMusic = serializedObject.FindProperty("playMusic");
             var hoverSound = serializedObject.FindProperty("hoverSound");
             var clickSound = serializedObject.FindProperty("clickSound");
 
@@ -192,6 +193,7 @@ namespace Michsky.UI.Shift
             if (showSounds)
             {
                 ShiftUIEditorHandler.DrawProperty(backgroundMusic, customSkin, "Background Music");
+                ShiftUIEditorHandler.DrawProperty(playMusic, customSkin, "Play Music");
                 ShiftUIEditorHandler.DrawProperty(hoverSound, customSkin, "Hover SFX");
                 ShiftUIEditorHandler.DrawProperty(clickSound, customSkin, "Click SFX");
             }
