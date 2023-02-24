@@ -8,6 +8,7 @@ public class Gate : MonoBehaviour
     private Collider _gateCollider;
     public float OpenDuration = 2f;
     public float OpenTargetY = -1.5f;
+    public AudioSource audioSource;
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class Gate : MonoBehaviour
 
     public void Open()
     {
+        audioSource.Play();
         StartCoroutine(OpenGateAnimation());
     }
 }
