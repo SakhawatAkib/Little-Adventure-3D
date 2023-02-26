@@ -84,6 +84,10 @@ MonoBehaviour:
   CurrentState: 0
   SpawnDuration: 2
   ItemToDrop: {fileID: 1506232422113083869, guid: 3d0a568eb789b2d47818776cabc7b4a9, type: 3}
+  audioSource: {fileID: 0}
+  coinSound: {fileID: 0}
+  orbSound: {fileID: 0}
+  getHurtSound: {fileID: 0}
 --- !u!143 &6924922898833874898
 CharacterController:
   m_ObjectHideFlags: 0
@@ -140,6 +144,8 @@ MonoBehaviour:
   AttackVFX: {fileID: 6044543169938009070}
   BeingHitVFX: {fileID: 8585385021063235282}
   BeingHitSplashVFX: {fileID: 5091917010390914819, guid: d1fe802ee7b6fc24497016910b9375d6, type: 3}
+  audioSource: {fileID: 2887462553398846422}
+  blastAudioClip: {fileID: 8300000, guid: 44d60c9c916ad424bbdc1a524ed1587b, type: 3}
 --- !u!114 &6924922898833874900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,7 +172,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 243864778437365490, guid: a9e5d729576b0a5478cec30207263369, type: 2}
   m_audioClip: {fileID: 8300000, guid: 6c065031f65cb28478de36928f81cbec, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.8
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
   Mute: 0

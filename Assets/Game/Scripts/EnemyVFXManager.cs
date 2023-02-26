@@ -12,8 +12,13 @@ public class EnemyVFXManager : MonoBehaviour
     public ParticleSystem BeingHitVFX;
     public VisualEffect BeingHitSplashVFX;
 
+    public AudioSource audioSource;
+    public AudioClip blastAudioClip;
+
     public void PlayAttackVFX()
     {
+        audioSource.clip = blastAudioClip;
+        audioSource.Play();
         AttackVFX.SendEvent("OnPlay");
     }
     public void BurstFootStep()

@@ -5,6 +5,9 @@ public class Enemy_02_Shoot : MonoBehaviour
 {
     public Transform ShootingPoint;
     public GameObject DamageOrb;
+    
+    public AudioSource audioSource;
+    public AudioClip shootAudioClip;
 
     private Character cc;
 
@@ -15,6 +18,8 @@ public class Enemy_02_Shoot : MonoBehaviour
 
     public void ShootTheDamageOrb()
     {
+        audioSource.clip = shootAudioClip;
+        audioSource.Play();
         Instantiate(DamageOrb, ShootingPoint.position, Quaternion.LookRotation(ShootingPoint.forward));
     }
 
